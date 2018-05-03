@@ -5,8 +5,6 @@ import './screens/newpost.dart';
 import './screens/favorite.dart';
 import './screens/profile.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Zapato extends StatefulWidget {
   static String tag = 'Zapato';
   @override
@@ -24,7 +22,8 @@ class ZapatoState extends State<Zapato> with SingleTickerProviderStateMixin{
       super.initState();
       _tabController = new TabController(vsync: this, length: 5);
 
-      Firestore.instance.collection('books').document().setData({ 'title': 'ggg', 'author': 'gggg vool' });
+      //upload data to firestore database
+      // Firestore.instance.collection('books').document().setData({ 'title': 'ggg', 'author': 'gggg vool' });
     }
 
   @override

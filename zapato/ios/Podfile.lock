@@ -30,6 +30,9 @@ PODS:
   - firebase_core (0.0.1):
     - Firebase/Core
     - Flutter
+  - firebase_database (0.0.1):
+    - Firebase/Database
+    - Flutter
   - FirebaseAnalytics (4.2.0):
     - FirebaseCore (~> 4.0)
     - FirebaseInstanceID (~> 2.0)
@@ -110,6 +113,7 @@ DEPENDENCIES:
   - cloud_firestore (from `Pods/.symlinks/plugins/cloud_firestore/ios`)
   - firebase_auth (from `Pods/.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `Pods/.symlinks/plugins/firebase_core/ios`)
+  - firebase_database (from `Pods/.symlinks/plugins/firebase_database/ios`)
   - Flutter (from `Pods/.symlinks/flutter/ios`)
   - google_sign_in (from `Pods/.symlinks/plugins/google_sign_in/ios`)
 
@@ -120,6 +124,8 @@ EXTERNAL SOURCES:
     :path: Pods/.symlinks/plugins/firebase_auth/ios
   firebase_core:
     :path: Pods/.symlinks/plugins/firebase_core/ios
+  firebase_database:
+    :path: Pods/.symlinks/plugins/firebase_database/ios
   Flutter:
     :path: Pods/.symlinks/flutter/ios
   google_sign_in:
@@ -131,6 +137,7 @@ SPEC CHECKSUMS:
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   firebase_auth: 27a5a77a032d557c18f8e223aaf8ec1368f6cdbc
   firebase_core: c96aa8b2fcf7f5167d32f22034f502f9304952b8
+  firebase_database: dd62ab9f71967c9011ce2fd03a89e762dcc364df
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
   FirebaseAuth: bf22cacf22c60ab454bf2636f556d8892b10b53f
   FirebaseCore: 90cb1c53d69b556f112a1bf72b5fcfaad7650790

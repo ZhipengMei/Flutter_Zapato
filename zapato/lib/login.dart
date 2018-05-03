@@ -1,18 +1,27 @@
-// import 'dart:async';
-// import 'dart:io';
-
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = new GoogleSignIn();
+//global current user object
+// FirebaseUser c_user;
 
 //Google sign in method
 // Future<String> _testSignInWithGoogle(BuildContext context) async {
-_testSignInWithGoogle(BuildContext context) async {
-  final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
+Future<Null> _testSignInWithGoogle(BuildContext context) async {
+
+  GoogleSignInAccount googleUser = _googleSignIn.currentUser;
+  if (googleUser == null)
+    googleUser = await _googleSignIn.signInSilently();
+  if (googleUser == null) {
+    await _googleSignIn.signIn();
+  }
+
+  // final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
   final GoogleSignInAuthentication googleAuth =
       await googleUser.authentication;
   final FirebaseUser user = await _auth.signInWithGoogle(    
@@ -28,11 +37,15 @@ _testSignInWithGoogle(BuildContext context) async {
   assert(user.uid == currentUser.uid);
 
   print('Success: *** User (${user.displayName}) is signed in. ***');
+  // print(_googleSignIn.currentUser.photoUrl);
+  // print(currentUser.uid);
+
   //move to another view when user is signed in
   if (user.displayName.isNotEmpty )
     Navigator.of(context).pushNamedAndRemoveUntil('/zapato', (Route<dynamic> route) => false);
   
   // return 'signInWithGoogle succeeded: $user';
+  // return user;
 }
 
 class LoginPage extends StatefulWidget {
@@ -142,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             //Login function call here
             print('Sign in with google');
-            _testSignInWithGoogle(context);
+            _testSignInWithGoogle(context);            
           },
           color: Colors.blueAccent,
           child: Text('Sign in with Google', style: TextStyle(color: Colors.white)),
