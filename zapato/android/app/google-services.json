@@ -1,0 +1,228 @@
+{
+  "project_info": {
+    "project_number": "666385105172",
+    "firebase_url": "https://zapato-fde27.firebaseio.com",
+    "project_id": "zapato-fde27",
+    "storage_bucket": "zapato-fde27.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666385105172:android:4cf5c9becee346b8",
+        "android_client_info": {
+          "package_name": "com.example.zapato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666385105172-6f3r4c1bldbvo96inki7uogqmb5qaqoa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zapato",
+            "certificate_hash": "97a536078ba6dc5c9cc13a7df6f9b706ad5a596c"
+          }
+        },
+        {
+          "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6_ETO7FB2ytgHNGFYRKtks1mBqGmiiqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666385105172-pcf5pn0ufii5uvrvdagrrgsi81hp0gln.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zapato"
+              }
+            },
+            {
+              "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666385105172:android:1f2ebadf1912d66a",
+        "android_client_info": {
+          "package_name": "com.zapato.zapato"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666385105172-l11uf5vtc7nntuu6njdj8da7gv54niij.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "724697fc722d56065f5608ac4be676a8453d788f"
+          }
+        },
+        {
+          "client_id": "666385105172-lij425mlrfilik00kbp8cr899l6lmpf5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "92d4673629c3642dbf65b38c98b58d01933dbea2"
+          }
+        },
+        {
+          "client_id": "666385105172-hobm2lmn3u0pc2b8m1oljbhsc1pvevgc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "fe38b733a53207eb89a98ffa9be928085c957802"
+          }
+        },
+        {
+          "client_id": "666385105172-ds7u89689urolehv37lfba7ma2ths0df.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "4727e044c888c49b4f304fabfc3f23a84a71cdb3"
+          }
+        },
+        {
+          "client_id": "666385105172-s5d5jbkst4olst2nl61in778qnpjfeiq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "97a536078ba6dc5c9cc13a7df6f9b706ad5a596c"
+          }
+        },
+        {
+          "client_id": "666385105172-mut3s4fc05ojs74n4grm91uugsi3n4i0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "2f7a84aaeeeaf8982d0165d7623690cf648f382e"
+          }
+        },
+        {
+          "client_id": "666385105172-6ko50ed93gkghhn0fdv3vg4r68ull22q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "f2798ce964bbee2afa659200c6874bcdda2bdc76"
+          }
+        },
+        {
+          "client_id": "666385105172-qkogrprtcpa4h1olsqvbmb30itv67ooe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "da5f58ab7ecda47755e4b6f441645aafa67b0137"
+          }
+        },
+        {
+          "client_id": "666385105172-0uocpd2av9i6rlcmi7m6n38n7nuc36f6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zapato.zapato",
+            "certificate_hash": "fa2e618199a73b4410a29ea9784be1d5130c9994"
+          }
+        },
+        {
+          "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6_ETO7FB2ytgHNGFYRKtks1mBqGmiiqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666385105172-pcf5pn0ufii5uvrvdagrrgsi81hp0gln.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zapato"
+              }
+            },
+            {
+              "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666385105172:android:b1b2fa0dfcf4acd5",
+        "android_client_info": {
+          "package_name": "edu.agustin.tabproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666385105172-fkct8bbfdhdkdnm37me60srnhhj27f85.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.agustin.tabproject",
+            "certificate_hash": "4727e044c888c49b4f304fabfc3f23a84a71cdb3"
+          }
+        },
+        {
+          "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6_ETO7FB2ytgHNGFYRKtks1mBqGmiiqQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666385105172-pcf5pn0ufii5uvrvdagrrgsi81hp0gln.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.zapato"
+              }
+            },
+            {
+              "client_id": "666385105172-vejebglm681mjvo3kht2fctoan04p1mc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
