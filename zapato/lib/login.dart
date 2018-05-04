@@ -3,28 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 final GoogleSignIn _googleSignIn = new GoogleSignIn();
-//global current user object
-// FirebaseUser c_user;
+GoogleSignInAccount googleUser = _googleSignIn.currentUser;
 
 //Google sign in method
 // Future<String> _testSignInWithGoogle(BuildContext context) async {
-Future<Null> _testSignInWithGoogle(BuildContext context) async {
-
-  GoogleSignInAccount googleUser = _googleSignIn.currentUser;
-  if (googleUser == null)
-    googleUser = await _googleSignIn.signInSilently();
+Future<Null> _testSignInWithGoogle(BuildContext context) async {  
+  if (googleUser == null) googleUser = await _googleSignIn.signInSilently();
   if (googleUser == null) {
-    await _googleSignIn.signIn();
+    googleUser = await _googleSignIn.signIn();
   }
 
   // final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
-  final GoogleSignInAuthentication googleAuth =
-      await googleUser.authentication;
-  final FirebaseUser user = await _auth.signInWithGoogle(    
+  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+  final FirebaseUser user = await _auth.signInWithGoogle(
     accessToken: googleAuth.accessToken,
     idToken: googleAuth.idToken,
   );
@@ -37,15 +32,21 @@ Future<Null> _testSignInWithGoogle(BuildContext context) async {
   assert(user.uid == currentUser.uid);
 
   print('Success: *** User (${user.displayName}) is signed in. ***');
-  // print(_googleSignIn.currentUser.photoUrl);
-  // print(currentUser.uid);
 
-  //move to another view when user is signed in
-  if (user.displayName.isNotEmpty )
-    Navigator.of(context).pushNamedAndRemoveUntil('/zapato', (Route<dynamic> route) => false);
-  
+  if(user.uid.isNotEmpty) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    //    int counter = (prefs.getInt('counter') ?? 0) + 1;
+    await prefs.setString("username", user.displayName);
+    await prefs.setString("email", user.email);
+    await prefs.setString("photoUrl", user.photoUrl);
+    await prefs.setString("uid", user.uid);
+
+    //move to another view when user is signed in
+    Navigator
+      .of(context)
+      .pushNamedAndRemoveUntil('/zapato', (Route<dynamic> route) => false);
+  }
   // return 'signInWithGoogle succeeded: $user';
-  // return user;
 }
 
 class LoginPage extends StatefulWidget {
@@ -55,7 +56,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   String emailValue = "";
   String passValue = "";
 
@@ -63,9 +63,10 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passController = new TextEditingController();
 
   //TODO
-  void _loginLogic() {    
+  void _loginLogic() {
     if (emailValue == 'aaa' && passValue == 'aaa') {
-      Navigator.of(context).pushNamedAndRemoveUntil('/zapato', (Route<dynamic> route) => false);// pushNamed('zapato');
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          '/zapato', (Route<dynamic> route) => false); // pushNamed('zapato');
     } else {
       //TODO, make textfield shake(animaton) to indicate incorrect info
       print('Incorrect info');
@@ -87,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.transparent,
         radius: 48.0,
         // child: Image.asset('assets/logo.png'),
-        child: Image.asset('assets/zapato_logo.jpg'),        
+        child: Image.asset('assets/zapato_logo.jpg'),
       ),
     );
 
@@ -155,10 +156,11 @@ class _LoginPageState extends State<LoginPage> {
           onPressed: () {
             //Login function call here
             print('Sign in with google');
-            _testSignInWithGoogle(context);            
+            _testSignInWithGoogle(context);
           },
           color: Colors.blueAccent,
-          child: Text('Sign in with Google', style: TextStyle(color: Colors.white)),
+          child: Text('Sign in with Google',
+              style: TextStyle(color: Colors.white)),
         ),
       ),
     );
@@ -179,7 +181,10 @@ class _LoginPageState extends State<LoginPage> {
             loginButton,
             forgotLabel,
             SizedBox(height: 24.0),
-            new Divider(height: 5.0, color: Colors.grey,),
+            new Divider(
+              height: 5.0,
+              color: Colors.grey,
+            ),
             googleSigninButton
           ],
         ),
