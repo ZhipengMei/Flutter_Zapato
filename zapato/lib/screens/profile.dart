@@ -21,24 +21,24 @@ class Profile extends StatefulWidget {
 }
 
 class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
-  String _imageUrl, _uid, _username, _email;
+  String _imageUrl;//, _uid, _username, _email;
 
   Future<Null> callSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _imageUrl = prefs.getString('photoUrl');
-      _uid = prefs.getString('uid');
-      _username = prefs.getString('username');
-      _email = prefs.getString('email');
+      // _uid = prefs.getString('uid');
+      // _username = prefs.getString('username');
+      // _email = prefs.getString('email');
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _uid = '';
-    _username = '';
-    _email = '';
+    // _uid = '';
+    // _username = '';
+    // _email = '';
     _imageUrl =
         "https://visualpharm.com/assets/336/User-595b40b65ba036ed117d26d4.svg"; //placeholder profile icon
     callSharedPreferences();

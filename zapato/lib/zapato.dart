@@ -117,7 +117,8 @@ class ZapatoState extends State<Zapato> with SingleTickerProviderStateMixin {
         children: <Widget>[
           //
           new Home(),
-          new Search(),
+          // new Search(),
+          new SearchList(),
           new Newpost(),
           new Favorite(),
           new Profile()
