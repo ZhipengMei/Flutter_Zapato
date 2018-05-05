@@ -19,11 +19,11 @@ class ProductDetailState extends State<ProductDetail> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    final shoeTitle = "YEEZY BOOST 350 V2".toUpperCase();
+    final shoeTitle = "${widget.myShoe.name}".toUpperCase();
     final priceSubtitle =
         "Price: \$${widget.myShoe.price} | Condition: ${widget.myShoe.shoeCondition}";
     final productDescription =
-        'Selling my ${widget.myShoe.name} for ${widget.myShoe.price}. ${widget.myShoe.shoeCondition} condition. Worn only twice. Buy dis.';
+        'Selling my ${widget.myShoe.name} for \$${widget.myShoe.price}. ${widget.myShoe.shoeCondition} condition. Worn only twice. Buy this.';
     final sellerName = 'YeezyLord92';
     double sellerRating = 4.5;
     final String customerImageUrl =
@@ -109,6 +109,7 @@ class ProductDetailState extends State<ProductDetail> {
                       Icons.check_circle,
                       color: Colors.brown,
                     ),
+                    new SizedBox(height: .50),
                     new Expanded(
                       child: new Container(
                         // decoration: new BoxDecoration(color: Colors.green),
