@@ -245,7 +245,7 @@ class TheFeedback {
         new Container(
           child: new Flexible(
             child: new Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,              
               children: <Widget>[
                 new Text(
                   name,
