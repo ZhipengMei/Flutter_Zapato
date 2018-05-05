@@ -1,19 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:zapato/shoeCard.dart';
 import 'package:zapato/shoe.dart';
 import 'home.dart';
 import 'package:zapato/userFeedbacks.dart';
-
-import 'package:flutter_image/network.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-
-final FirebaseAuth _auth = FirebaseAuth.instance;
-final GoogleSignIn _googleSignIn = new GoogleSignIn();
 
 Image myAvatar;
 
@@ -30,24 +23,12 @@ class Profile extends StatefulWidget {
 class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   String _imageUrl, _uid, _username, _email;
 
-  //signout method
-  Future<Null> _signOut(BuildContext context) async {
-    await _googleSignIn.signOut(); //sign out of google
-    await _auth.signOut(); //sign out of firebase
-    print('User signout');
-    Navigator
-        .of(context)
-        .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
-  }
-
   Future<Null> callSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-
     setState(() {
       _imageUrl = prefs.getString('photoUrl');
       _uid = prefs.getString('uid');
       _username = prefs.getString('username');
-      ;
       _email = prefs.getString('email');
     });
   }
@@ -87,12 +68,6 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  downloadImage() {
-    myAvatar = new Image(
-      image: new NetworkImageWithRetry(_imageUrl),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     //************************
@@ -123,6 +98,7 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             padding: new EdgeInsets.all(3.0),
             child: new Column(
               crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 new Container(
                   height: 40.0,
@@ -134,13 +110,20 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                           fontFamily: 'Nunito')),
                 ),
                 new Expanded(
-                  flex: 1,
+                  flex: 1,                  
                   child: new Container(
-                      // decoration: new BoxDecoration(color: Colors.green),
-                      child: new Text(
-                    "Rating: 5920",
-                    style: new TextStyle(fontFamily: 'Nunito', fontSize: 16.0),
-                  )),
+                    // decoration: new BoxDecoration(color: Colors.green),
+                    //   child: new Text(
+                    // "Rating: 5920",
+                    // style: new TextStyle(fontFamily: 'Nunito', fontSize: 16.0),
+                    // )
+                    alignment: Alignment.topLeft,
+                    child: new StarRating(
+                      rating: 4.5,
+                      mainAlignment: MainAxisAlignment.end,
+                      onRatingChanged: (rating, mainAlignment) => rating,
+                    ),
+                  ),
                 ),
                 new Expanded(
                   flex: 2,
@@ -188,13 +171,14 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
     );
 
     final currentListingShoe = new Container(
-        height: 300.0,
+        height: 200.0,
         decoration: new BoxDecoration(color: Colors.white70),
         padding: new EdgeInsets.all(15.0),
         child: new GridView.count(
+            scrollDirection: Axis.horizontal,
             primary: true,
             padding: EdgeInsets.all(1.0),
-            crossAxisCount: 2,
+            crossAxisCount: 1,
             childAspectRatio: 1.0,
             mainAxisSpacing: 1.0,
             crossAxisSpacing: 1.0,
@@ -229,10 +213,16 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
             currentListingShoe,
             feedbakText,
             // feedbakComment,
-            TheFeedback().feedbakComment(feedbackList[0].name.toString(),
-                feedbackList[0].comment.toString(), 5.0),
-            TheFeedback().feedbakComment(feedbackList[1].name.toString(),
-                feedbackList[1].comment.toString(), 2.5),
+            TheFeedback().feedbakComment(
+                feedbackList[0].name.toString(),
+                feedbackList[0].comment.toString(),
+                5.0,
+                'https://res.cloudinary.com/campus-job/image/upload/t_student-public-page/v1/profile_pictures/YNM5evhNyO_20160909.jpg'),
+            TheFeedback().feedbakComment(
+                feedbackList[1].name.toString(),
+                feedbackList[1].comment.toString(),
+                2.5,
+                'https://www.thefamouspeople.com/profiles/images/kanye-west-2.jpg'),
           ],
         ))
       ],
@@ -240,62 +230,16 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
   }
 }
 
-// class TheFeedback {
-//   Row feedbakComment(String name, String comment) {
-//     return new Row(
-//       children: <Widget>[
-//         new Container(
-//           padding: new EdgeInsets.all(14.0),
-//           child: new CircleAvatar(
-//             child: new Icon(
-//               Icons.person,
-//               size: 40.0,
-//             ),
-//             radius: 30.0,
-//           ),
-//         ),
-//         new Container(
-//           child: new Flexible(
-//             child: new Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: <Widget>[
-//                 new Text(
-//                   name,
-//                   style: new TextStyle(fontWeight: FontWeight.bold),
-//                 ),
-//                 new Text(comment,
-//                     softWrap: true, textAlign: TextAlign.start),
-//                 new Row(
-//                   children: <Widget>[
-//                     new Icon(Icons.star),
-//                     new Icon(Icons.star),
-//                     new Icon(Icons.star),
-//                     new Icon(Icons.star),
-//                     new Icon(Icons.star),
-//                   ],
-//                 )
-//               ],
-//             ),
-//           ),
-//         )
-//       ],
-//     );
-//   }
-// }
-
 class TheFeedback {
-
-  Row feedbakComment(String name, String comment, double rating) {
+  Row feedbakComment(
+      String name, String comment, double rating, String customerImageUrl) {
     return new Row(
       children: <Widget>[
         new Container(
           padding: new EdgeInsets.all(14.0),
           child: new CircleAvatar(
-            child: new Icon(
-              Icons.person,
-              size: 40.0,
-            ),
             radius: 30.0,
+            backgroundImage: new CachedNetworkImageProvider(customerImageUrl),
           ),
         ),
         new Container(
@@ -310,7 +254,8 @@ class TheFeedback {
                 new Text(comment, softWrap: true, textAlign: TextAlign.start),
                 new StarRating(
                   rating: rating,
-                  onRatingChanged: (rating) => rating,
+                  mainAlignment: MainAxisAlignment.start,
+                  onRatingChanged: (rating, mainAlignment) => rating,
                 )
               ],
             ),
@@ -321,18 +266,19 @@ class TheFeedback {
   }
 }
 
-typedef void RatingChangeCallback(double rating);
+typedef void RatingChangeCallback(double rating, MainAxisAlignment mainAlignment);
 
 class StarRating extends StatelessWidget {
   final int starCount;
   final double rating;
   final RatingChangeCallback onRatingChanged;
   final Color color;
+  final MainAxisAlignment mainAlignment;
 
   StarRating(
-      {this.starCount = 5, this.rating = .0, this.onRatingChanged, this.color});
+      {this.starCount = 5, this.rating = .0, this.onRatingChanged, this.color, this.mainAlignment});
 
-  Widget buildStar(BuildContext context, int index) {
+  Widget buildStar(BuildContext context, int index) {    
     Icon icon;
     if (index >= rating) {
       icon = new Icon(
@@ -352,7 +298,7 @@ class StarRating extends StatelessWidget {
     }
     return new InkResponse(
       onTap:
-          onRatingChanged == null ? null : () => onRatingChanged(index + 1.0),
+          onRatingChanged == null ? null : () => onRatingChanged(index + 1.0, mainAlignment),
       child: icon,
     );
   }
@@ -360,7 +306,8 @@ class StarRating extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Row(
+      mainAxisAlignment: mainAlignment,
         children:
-            new List.generate(starCount, (index) => buildStar(context, index)));
+          new List.generate(starCount, (index) => buildStar(context, index)));
   }
 }

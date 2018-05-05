@@ -44,7 +44,7 @@ class TheGridView {
   }
 
   GridView build(List<Shoe> shoesList) {
-    return GridView.count(
+    return GridView.count(        
         primary: true,
         padding: EdgeInsets.all(1.0),
         crossAxisCount: 2,

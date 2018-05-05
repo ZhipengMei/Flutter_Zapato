@@ -144,6 +144,16 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    final createLabel = FlatButton(
+      child: Text(
+        'Register',
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () {
+        //TODO Forgot password function here
+      },
+    );
+
     final googleSigninButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: Material(
@@ -180,6 +190,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 24.0),
             loginButton,
             forgotLabel,
+            createLabel,
             SizedBox(height: 24.0),
             new Divider(
               height: 5.0,
