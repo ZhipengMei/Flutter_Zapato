@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:zapato/shoe.dart';
+import 'home.dart';
 
 class SearchList extends StatefulWidget {
-  SearchList({Key key}) : super(key: key);
+  SearchList({ Key key }) : super(key: key);
   @override
   _SearchListState createState() => new _SearchListState();
+
 }
 
-class _SearchListState extends State<SearchList> {
-  Widget appBarTitle = new Text(
-    "Looking for a new kick?",
-    style: new TextStyle(color: Colors.white),
-  );
-  Icon actionIcon = new Icon(
-    Icons.search,
-    color: Colors.white,
-  );
+class _SearchListState extends State<SearchList>
+{
+  Widget appBarTitle = new Text("", style: new TextStyle(color: Colors.white),);
+  Icon actionIcon = new Icon(Icons.search, color: Colors.white,);
   final key = new GlobalKey<ScaffoldState>();
-  static final TextEditingController _searchQuery = new TextEditingController();
-  List<String> _list;
+  final TextEditingController _searchQuery = new TextEditingController();
   bool _isSearching;
   String _searchText = "";
+  List<Shoe> shoesList = new List<Shoe>();
 
   _SearchListState() {
     _searchQuery.addListener(() {
@@ -28,7 +26,8 @@ class _SearchListState extends State<SearchList> {
           _isSearching = false;
           _searchText = "";
         });
-      } else {
+      }
+      else {
         setState(() {
           _isSearching = true;
           _searchText = _searchQuery.text;
@@ -37,37 +36,12 @@ class _SearchListState extends State<SearchList> {
     });
   }
 
-  Widget appBarTitle2 = new TextField(
-    controller: _searchQuery,
-    style: new TextStyle(
-      color: Colors.white,
-    ),
-    decoration: new InputDecoration(
-        prefixIcon: new Icon(Icons.search, color: Colors.white),
-        hintText: "Search...",
-        hintStyle: new TextStyle(color: Colors.white)),
-  );
-
   @override
   void initState() {
     super.initState();
+    shoesList = HomeState().getShoesList();
     _isSearching = false;
-    init();
-  }
 
-  void init() {
-    _list = List();
-    _list.add("Google");
-    _list.add("IOS");
-    _list.add("Andorid");
-    _list.add("Dart");
-    _list.add("Flutter");
-    _list.add("Python");
-    _list.add("React");
-    _list.add("Xamarin");
-    _list.add("Kotlin");
-    _list.add("Java");
-    _list.add("RxAndroid");
   }
 
   @override
@@ -83,87 +57,57 @@ class _SearchListState extends State<SearchList> {
   }
 
   List<ChildItem> _buildList() {
-    return _list.map((contact) => new ChildItem(contact)).toList();
+    return shoesList.map((contact) => new ChildItem(contact.name)).toList();
   }
 
   List<ChildItem> _buildSearchList() {
     if (_searchText.isEmpty) {
-      return _list.map((contact) => new ChildItem(contact)).toList();
-    } else {
+      return shoesList.map((contact) => new ChildItem(contact.name))
+          .toList();
+    }
+    else {
       List<String> _searchList = List();
-      for (int i = 0; i < _list.length; i++) {
-        String name = _list.elementAt(i);
+      for (int i = 0; i < shoesList.length; i++) {
+        String  name = shoesList[i].name;
         if (name.toLowerCase().contains(_searchText.toLowerCase())) {
           _searchList.add(name);
         }
       }
-      return _searchList.map((contact) => new ChildItem(contact)).toList();
+      return _searchList.map((contact) => new ChildItem(contact))
+          .toList();
     }
   }
 
   Widget buildBar(BuildContext context) {
     return new AppBar(
         centerTitle: true,
-        // title: appBarTitle,
-        title: appBarTitle2,
+        title: appBarTitle,
         actions: <Widget>[
-          new IconButton(
-            icon: actionIcon,
-            onPressed: () {
-              setState(() {
-                if (this.actionIcon.icon == Icons.search) {
-                  this.actionIcon = new Icon(
-                    Icons.close,
+          new IconButton(icon: actionIcon, onPressed: () {
+            setState(() {
+              if (this.actionIcon.icon == Icons.search) {
+                this.actionIcon = new Icon(Icons.close, color: Colors.white,);
+                this.appBarTitle = new TextField(
+                  controller: _searchQuery,
+                  style: new TextStyle(
                     color: Colors.white,
-                  );
-                  this.appBarTitle = new TextField(
-                    controller: _searchQuery,
-                    style: new TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: new InputDecoration(
-                        prefixIcon: new Icon(Icons.search, color: Colors.white),
-                        hintText: "Search...",
-                        hintStyle: new TextStyle(color: Colors.white)),
-                  );
-                  // _handleSearchStart();
-                } else {
-                  // _handleSearchEnd();
-                }
-              });
-            },
-          ),
-        ]);
-    // return new AppBar(
-    //     centerTitle: true,
-    //     // title: appBarTitle,
-    //     title: new Text(''),
-    //     actions: <Widget>[
-    //       new IconButton(icon: actionIcon, onPressed: () {
-    //         setState(() {
-    //           if (this.actionIcon.icon == Icons.search) {
-    //             this.actionIcon = new Icon(Icons.close, color: Colors.white,);
-    //             this.appBarTitle = new TextField(
-    // controller: _searchQuery,
-    // style: new TextStyle(
-    //   color: Colors.white,
 
-    // ),
-    // decoration: new InputDecoration(
-    //     prefixIcon: new Icon(Icons.search, color: Colors.white),
-    //     hintText: "Search...",
-    //     hintStyle: new TextStyle(color: Colors.white)
-    // ),
-    //             );
-    //             _handleSearchStart();
-    //           }
-    //           else {
-    //             _handleSearchEnd();
-    //           }
-    //         });
-    //       },),
-    //     ]
-    // );
+                  ),
+                  decoration: new InputDecoration(
+                      prefixIcon: new Icon(Icons.search, color: Colors.white),
+                      hintText: "Search...",
+                      hintStyle: new TextStyle(color: Colors.white)
+                  ),
+                );
+                _handleSearchStart();
+              }
+              else {
+                _handleSearchEnd();
+              }
+            });
+          },),
+        ]
+    );
   }
 
   void _handleSearchStart() {
@@ -174,18 +118,14 @@ class _SearchListState extends State<SearchList> {
 
   void _handleSearchEnd() {
     setState(() {
-      this.actionIcon = new Icon(
-        Icons.search,
-        color: Colors.white,
-      );
-      this.appBarTitle = new Text(
-        "Search Sample",
-        style: new TextStyle(color: Colors.white),
-      );
+      this.actionIcon = new Icon(Icons.search, color: Colors.white,);
+      this.appBarTitle =
+      new Text("", style: new TextStyle(color: Colors.white),);
       _isSearching = false;
       _searchQuery.clear();
     });
   }
+
 }
 
 class ChildItem extends StatelessWidget {
@@ -195,4 +135,5 @@ class ChildItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return new ListTile(title: new Text(this.name));
   }
+
 }

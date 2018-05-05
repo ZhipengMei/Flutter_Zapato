@@ -15,7 +15,6 @@ List<Shoe> shoesList = new List<Shoe>();
 class Home extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return new HomeState();
   }
 }
@@ -64,6 +63,6 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return TheGridView().build(shoesList);
+    return TheGridView().build(shoesList, context);
   }
 }
