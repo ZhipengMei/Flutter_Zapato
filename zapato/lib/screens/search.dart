@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:zapato/shoe.dart';
 import 'home.dart';
 import 'product_detail.dart';
-import 'package:zapato/shoe.dart';
 
 class SearchList extends StatefulWidget {
   SearchList({Key key}) : super(key: key);
@@ -70,9 +69,9 @@ class _SearchListState extends State<SearchList> {
     } else {
       List<Shoe> _searchList = List();
       for (int i = 0; i < shoesList.length; i++) {
-        Shoe matched_shoe = shoesList[i];
-        if (matched_shoe.name.toLowerCase().contains(_searchText.toLowerCase())) {
-          _searchList.add(matched_shoe);
+        Shoe matchedShoe = shoesList[i];
+        if (matchedShoe.name.toLowerCase().contains(_searchText.toLowerCase())) {
+          _searchList.add(matchedShoe);
         }
       }
       return _searchList.map((contact) => new ChildItem(contact)).toList();
