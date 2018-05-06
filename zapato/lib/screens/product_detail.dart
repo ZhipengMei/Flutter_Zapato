@@ -16,6 +16,8 @@ class ProductDetail extends StatefulWidget {
 }
 
 class ProductDetailState extends State<ProductDetail> {
+  Icon actionIcon = new Icon(Icons.bookmark_border, color: Colors.white,);
+
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
@@ -48,6 +50,23 @@ class ProductDetailState extends State<ProductDetail> {
     return new Scaffold(
       appBar: new AppBar(
         title: new Text('${widget.myShoe.name}'),
+        actions: <Widget>[
+          new IconButton(
+            icon: actionIcon,
+            onPressed: () {
+              //TODO add this shoe's id to current log
+              setState(() {
+                if (this.actionIcon.icon == Icons.bookmark_border) {
+                  print('Bookmarked it');
+                  this.actionIcon = new Icon(Icons.bookmark, color: Colors.white,);
+                } else {
+                  print('un-Bookmarked it');
+                  this.actionIcon = new Icon(Icons.bookmark_border, color: Colors.white,);
+                }
+              });
+            },
+          )
+        ],
       ),
       body: Column(
         children: <Widget>[
@@ -87,7 +106,7 @@ class ProductDetailState extends State<ProductDetail> {
                       radius: 30.0,
                     ),
                     //payment function
-                    onPressed: (){
+                    onPressed: () {
                       _paymentInfo();
                     },
                     iconSize: 60.0,

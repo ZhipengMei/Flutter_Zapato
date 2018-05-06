@@ -352,7 +352,7 @@ class PaymentInfoState extends State<PaymentInfo> {
 
   @override
   Widget build(BuildContext context) {
-    final shoeTitle = "YEEZY BOOST 350 V2".toUpperCase();
+    // final shoeTitle = "YEEZY BOOST 350 V2".toUpperCase();
     // final priceSubtitle =
     //     "Price: \$${widget.myShoe.price} | Condition: ${widget.myShoe.shoeCondition}";
     // final productDescription =
@@ -360,7 +360,7 @@ class PaymentInfoState extends State<PaymentInfo> {
     // final sellerName = 'YeezyLord92';
     // double sellerRating = 4.5;
     // final String customerImageUrl = 'https://www.thefamouspeople.com/profiles/images/kanye-west-2.jpg';
-    final height = MediaQuery.of(context).size.height;
+    // final height = MediaQuery.of(context).size.height;
 
     // Main UI
     return new Scaffold(
