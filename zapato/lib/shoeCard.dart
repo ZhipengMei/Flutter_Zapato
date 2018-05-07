@@ -107,12 +107,11 @@ class TheGridView {
                   new Container(
                     alignment: Alignment.topRight,
                     // padding: new EdgeInsets.only(left: 120.0),
-                    child: CircleAvatar(
-                        backgroundColor: Colors.lightBlue,
-                        radius: 25.0,
-                        child: new Text("\$${shoe.price}",
-                            style: new TextStyle(
-                                color: Colors.white, fontSize: 13.0))),
+                    child: new Icon(
+                      // Icons.favorite,
+                      Icons.bookmark,
+                      color: Colors.red,
+                    ),
                   ),
                 ],
               ),

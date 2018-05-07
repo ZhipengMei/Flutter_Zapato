@@ -1,152 +1,316 @@
 import 'package:flutter/material.dart';
+import 'package:zapato/shoeCard.dart';
 
 class Newpost extends StatefulWidget {
-  Newpost({ Key key }) : super(key: key);
+  //Newpost({ Key key }) : super(key: key);
   @override
   _NewpostState createState() => new _NewpostState();
-
 }
 
-class _NewpostState extends State<Newpost>
-{
-  Widget appBarTitle = new Text("Search Sample", style: new TextStyle(color: Colors.white),);
-  Icon actionIcon = new Icon(Icons.search, color: Colors.white,);
-  final key = new GlobalKey<ScaffoldState>();
-  final TextEditingController _searchQuery = new TextEditingController();
-  List<String> _list;
-  bool _IsSearching;
-  String _searchText = "";
-
-  _NewpostState() {
-    _searchQuery.addListener(() {
-      if (_searchQuery.text.isEmpty) {
-        setState(() {
-          _IsSearching = false;
-          _searchText = "";
-        });
-      }
-      else {
-        setState(() {
-          _IsSearching = true;
-          _searchText = _searchQuery.text;
-        });
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _IsSearching = false;
-    init();
-
-  }
-
-  void init() {
-    _list = List();
-    _list.add("Google");
-    _list.add("IOS");
-    _list.add("Andorid");
-    _list.add("Dart");
-    _list.add("Flutter");
-    _list.add("Python");
-    _list.add("React");
-    _list.add("Xamarin");
-    _list.add("Kotlin");
-    _list.add("Java");
-    _list.add("RxAndroid");
-  }
-
+class _NewpostState extends State<Newpost> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      key: key,
-      appBar: buildBar(context),
-      body: new ListView(
-        padding: new EdgeInsets.symmetric(vertical: 8.0),
-        children: _IsSearching ? _buildSearchList() : _buildList(),
+    return new Container(
+      child: new ListView(
+        children: <Widget>[
+          // mainUI().mainUIColumn(),
+          /**
+         * Title
+         * **/
+          new Container(
+            padding: new EdgeInsets.all(15.0),
+            child: new Center(
+              child: new Text(
+                "Title",
+                style:
+                    new TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
+              ),
+            ),
+          ),
+          /**
+         * Textfield
+         * **/
+          new Container(
+            padding: new EdgeInsets.only(left: 15.0, right: 15.0),
+            child: new TextField(
+              // controller: _emailController,
+              keyboardType: TextInputType.number,
+              autofocus: false,
+              decoration: InputDecoration(
+                  hintText: 'Name, brand, etc.',
+                  contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                  border: OutlineInputBorder(borderSide: BorderSide.none)),
+            ),
+          ),
+          /**
+         * Textfield
+         * **/
+          new Container(
+            padding: new EdgeInsets.all(15.0),
+            child: new Center(
+              child: new Text(
+                "Images",
+                style:
+                    new TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
+              ),
+            ),
+          ),
+/**
+         * Flatbutton
+         * **/
+          new Container(
+              child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Flexible(
+                child: new FlatButton(
+                  child: new Column(
+                    children: <Widget>[
+                      new Icon(Icons.camera_alt),
+                      new Text("Take a photo")
+                    ],
+                  ),
+                  color: Colors.grey,
+                  onPressed: () {
+                    print("Taking a photo.");
+                  },
+                  padding: new EdgeInsets.all(20.0),
+                ),
+              ),
+              new SizedBox(width: 40.0),
+              new Flexible(
+                child: new FlatButton(
+                  child: new Column(
+                    children: <Widget>[
+                      new Icon(Icons.photo_library),
+                      new Text("Add from library")
+                    ],
+                  ),
+                  color: Colors.grey,
+                  onPressed: () {
+                    print("Adding photo from library");
+                  },
+                  padding: new EdgeInsets.only(
+                      left: 10.0, top: 20.0, right: 10.0, bottom: 20.0),
+                ),
+              ),
+            ],
+          )),
+          new SizedBox(height: 20.0),
+          new Container(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Icon(
+                  Icons.photo,
+                  color: Colors.black,
+                  size: 170.0,
+                ),
+                new Icon(
+                  Icons.photo,
+                  color: Colors.black,
+                  size: 170.0,
+                ),
+              ],
+            ),
+          ),
+          new Container(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new Icon(
+                  Icons.photo,
+                  color: Colors.black,
+                  size: 170.0,
+                ),
+                new Icon(
+                  Icons.photo,
+                  color: Colors.black,
+                  size: 170.0,
+                ),
+              ],
+            ),
+          ),
+          new Container(
+            // decoration: new BoxDecoration(color: Colors.yellow),
+            child: new Row(
+              children: <Widget>[
+                new Container(
+                    padding: new EdgeInsets.only(left: 5.0),
+                    alignment: Alignment.centerLeft,
+                    // decoration: new BoxDecoration(color: Colors.green),
+                    child: new Text(
+                      "Cancel",
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 16.0),
+                    )),
+                new Expanded(
+                  child: new Container(
+                    alignment: Alignment.centerRight,
+                    // decoration: new BoxDecoration(color: Colors.red),
+                    child: new Icon(
+                      Icons.chevron_right,
+                      color: Colors.black,
+                      size: 50.0,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
-
-  List<ChildItem> _buildList() {
-    return _list.map((contact) => new ChildItem(contact)).toList();
-  }
-
-  List<ChildItem> _buildSearchList() {
-    if (_searchText.isEmpty) {
-      return _list.map((contact) => new ChildItem(contact))
-          .toList();
-    }
-    else {
-      List<String> _searchList = List();
-      for (int i = 0; i < _list.length; i++) {
-        String  name = _list.elementAt(i);
-        if (name.toLowerCase().contains(_searchText.toLowerCase())) {
-          _searchList.add(name);
-        }
-      }
-      return _searchList.map((contact) => new ChildItem(contact))
-          .toList();
-    }
-  }
-
-  Widget buildBar(BuildContext context) {
-    return new AppBar(
-        centerTitle: true,
-        title: appBarTitle,
-        actions: <Widget>[
-          new IconButton(icon: actionIcon, onPressed: () {
-            setState(() {
-              if (this.actionIcon.icon == Icons.search) {
-                this.actionIcon = new Icon(Icons.close, color: Colors.white,);
-                this.appBarTitle = new TextField(
-                  controller: _searchQuery,
-                  style: new TextStyle(
-                    color: Colors.white,
-
-                  ),
-                  decoration: new InputDecoration(
-                      prefixIcon: new Icon(Icons.search, color: Colors.white),
-                      hintText: "Search...",
-                      hintStyle: new TextStyle(color: Colors.white)
-                  ),
-                );
-                _handleSearchStart();
-              }
-              else {
-                _handleSearchEnd();
-              }
-            });
-          },),
-        ]
-    );
-  }
-
-  void _handleSearchStart() {
-    setState(() {
-      _IsSearching = true;
-    });
-  }
-
-  void _handleSearchEnd() {
-    setState(() {
-      this.actionIcon = new Icon(Icons.search, color: Colors.white,);
-      this.appBarTitle =
-      new Text("Search Sample", style: new TextStyle(color: Colors.white),);
-      _IsSearching = false;
-      _searchQuery.clear();
-    });
-  }
-
 }
 
-class ChildItem extends StatelessWidget {
-  final String name;
-  ChildItem(this.name);
-  @override
-  Widget build(BuildContext context) {
-    return new ListTile(title: new Text(this.name));
+class mainUI {
+  Widget mainUIColumn() {
+    return Column(
+      children: <Widget>[
+        // /**
+        //  * Title
+        //  * **/
+        // new Container(
+        //   padding: new EdgeInsets.all(15.0),
+        //   child: new Text(
+        //     "Title",
+        //     style: new TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
+        //   ),
+        // ),
+        // /**
+        //  * Textfield
+        //  * **/
+        // new Container(
+        //   padding: new EdgeInsets.only(left: 15.0, right: 15.0),
+        //   child: new TextField(
+        //     // controller: _emailController,
+        //     keyboardType: TextInputType.number,
+        //     autofocus: false,
+        //     decoration: InputDecoration(
+        //         hintText: 'Name, brand, etc.',
+        //         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        //         border: OutlineInputBorder(borderSide: BorderSide.none)),
+        //   ),
+        // ),
+        // /**
+        //  * Textfield
+        //  * **/
+        // new Container(
+        //   padding: new EdgeInsets.all(15.0),
+        //   child: new Text(
+        //     "Images",
+        //     style: new TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
+        //   ),
+        // ),
+        // /**
+        //  * Flatbutton
+        //  * **/
+        // new Container(
+        //     child: new Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: <Widget>[
+        //     new Flexible(
+        //       child: new FlatButton(
+        //         child: new Column(
+        //           children: <Widget>[
+        //             new Icon(Icons.camera_alt),
+        //             new Text("Take a photo")
+        //           ],
+        //         ),
+        //         color: Colors.grey,
+        //         onPressed: () {
+        //           print("Taking a photo.");
+        //         },
+        //         padding: new EdgeInsets.all(20.0),
+        //       ),
+        //     ),
+        //     new SizedBox(width: 40.0),
+        //     new Flexible(
+        //       child: new FlatButton(
+        //         child: new Column(
+        //           children: <Widget>[
+        //             new Icon(Icons.photo_library),
+        //             new Text("Add from library")
+        //           ],
+        //         ),
+        //         color: Colors.grey,
+        //         onPressed: () {
+        //           print("Adding photo from library");
+        //         },
+        //         padding: new EdgeInsets.only(
+        //             left: 10.0, top: 20.0, right: 10.0, bottom: 20.0),
+        //       ),
+        //     ),
+        //   ],
+        // )),
+        /**
+         * Images
+         * **/
+        // new SizedBox(height: 20.0),
+        // new Container(
+        //   child: new Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: <Widget>[
+        //       new Icon(
+        //         Icons.photo,
+        //         color: Colors.black,
+        //         size: 170.0,
+        //       ),
+        //       new Icon(
+        //         Icons.photo,
+        //         color: Colors.black,
+        //         size: 170.0,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        // new Container(
+        //   child: new Row(
+        //     mainAxisAlignment: MainAxisAlignment.center,
+        //     children: <Widget>[
+        //       new Icon(
+        //         Icons.photo,
+        //         color: Colors.black,
+        //         size: 170.0,
+        //       ),
+        //       new Icon(
+        //         Icons.photo,
+        //         color: Colors.black,
+        //         size: 170.0,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+        new Expanded(
+            child: new Container(
+          // decoration: new BoxDecoration(color: Colors.yellow),
+          child: new Row(
+            children: <Widget>[
+              new Container(
+                  padding: new EdgeInsets.only(left: 5.0),
+                  alignment: Alignment.centerLeft,
+                  // decoration: new BoxDecoration(color: Colors.green),
+                  child: new Text(
+                    "Cancel",
+                    style: new TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 16.0),
+                  )),
+              new Expanded(
+                child: new Container(
+                  alignment: Alignment.centerRight,
+                  // decoration: new BoxDecoration(color: Colors.red),
+                  child: new Icon(
+                    Icons.chevron_right,
+                    color: Colors.black,
+                    size: 50.0,
+                  ),
+                ),
+              )
+            ],
+          ),
+        )),
+      ],
+    );
   }
-
 }

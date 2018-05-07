@@ -217,7 +217,7 @@ class ProfileState extends State<Profile> with SingleTickerProviderStateMixin {
                 feedbackList[0].name.toString(),
                 feedbackList[0].comment.toString(),
                 5.0,
-                'https://res.cloudinary.com/campus-job/image/upload/t_student-public-page/v1/profile_pictures/YNM5evhNyO_20160909.jpg'),
+                'https://cdn.shopclues.com/images/thumbnails/87189/320/320/130413659PLGS0720a1509793013.jpg'                ),
             TheFeedback().feedbakComment(
                 feedbackList[1].name.toString(),
                 feedbackList[1].comment.toString(),
